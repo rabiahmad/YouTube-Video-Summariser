@@ -1,5 +1,6 @@
 import assemblyai as aai
 import toml
+import random
 
 
 def get_apikey(connector, item):
@@ -8,9 +9,14 @@ def get_apikey(connector, item):
     return result
 
 
+def cycled_apikey():
+    key_index = random.randint(1, 2)
+    return get_apikey("ai-assembly", f"api_key_{key_index}")
+
+
 def analyse_audio(FILE_URL):
     # replace with your API token
-    aai.settings.api_key = get_apikey("ai-assembly", "api_key")
+    aai.settings.api_key = cycled_apikey()
 
     # URL of the file to transcribe
     config = aai.TranscriptionConfig(
