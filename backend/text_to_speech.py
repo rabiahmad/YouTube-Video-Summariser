@@ -1,10 +1,7 @@
 from gtts import gTTS
 from playsound import playsound
 import os
-<<<<<<< Updated upstream
-=======
 import streamlit as st
->>>>>>> Stashed changes
 
 def text_to_speech(input_text):
     language = 'en'
@@ -19,12 +16,9 @@ def text_to_speech(input_text):
 
     # Play the MP3 file
     absolute_mp3_path = os.path.abspath(mp3_file_path)
-<<<<<<< Updated upstream
-    playsound(absolute_mp3_path)
-=======
-    #playsound(absolute_mp3_path)
+    
+    # playsound(absolute_mp3_path)
     st.audio(absolute_mp3_path)
->>>>>>> Stashed changes
 
 if __name__ == "__main__":
     text_to_speech("Hello, This is a speech to text.")
