@@ -63,6 +63,7 @@ def analyse_audio(FILE_URL):
     response = {
         "summary": transcript.summary,
         "label_relevance": transcript.iab_categories.summary,
+        "results": transcript.iab_categories.results,
     }
 
     return response
