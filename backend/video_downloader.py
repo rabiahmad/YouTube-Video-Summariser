@@ -1,8 +1,14 @@
 from pytube import YouTube
 import os
 
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
+
 
 def download_video(url):
+    logger = logging.getLogger(f"{__name__}.download_video")
     yt = YouTube(url)
 
     # extract only audio
@@ -14,6 +20,7 @@ def download_video(url):
     out_file = video.download(output_path=destination)
 
     # clean existing files
+    logger.info("deleting data/audio.mp3")
     try:
         os.remove("data/audio.mp3")
     except FileNotFoundError:
@@ -25,7 +32,7 @@ def download_video(url):
     os.rename(out_file, new_file)
 
     # result of success
-    print(yt.title + " has been successfully downloaded.")
+    logger.info(yt.title + " has been successfully downloaded.")
     return yt.title
 
 

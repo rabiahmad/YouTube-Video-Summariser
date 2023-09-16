@@ -2,19 +2,32 @@ import assemblyai as aai
 import toml
 import random
 
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
+
 
 def get_apikey(connector, item):
+    logger = logging.getLogger(f"{__name__}.get_apikey")
+    logger.debug(f"Getting API key from secrets.toml [{connector}][{item}]")
     secrets = toml.load(".streamlit/secrets.toml")
     result = secrets[connector][item]
     return result
 
 
 def cycled_apikey():
+    logger = logging.getLogger(f"{__name__}.cycled_apikey")
     key_index = random.randint(1, 2)
-    return get_apikey("ai-assembly", f"api_key_{key_index}")
+    api_key = get_apikey("ai-assembly", f"api_key_{key_index}")
+    logger.debug(f"Using API Key index {key_index}")
+    logger.debug(f"API Key is {api_key}")
+    return api_key
 
 
 def analyse_audio(FILE_URL):
+    logger = logging.getLogger(f"{__name__}.analyse_audio")
+    logger.info("Running AI Assembly LLM model")
     # replace with your API token
     aai.settings.api_key = cycled_apikey()
 
@@ -45,7 +58,7 @@ def analyse_audio(FILE_URL):
 
     # Get a summary of all topics in the transcript
 
-    print(transcript.summary)
+    logger.debug(transcript.summary)
 
     response = {
         "summary": transcript.summary,
