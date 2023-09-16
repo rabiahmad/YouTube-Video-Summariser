@@ -14,6 +14,7 @@ if st.button(label="Summarise", use_container_width=True):
     video_title = download_video(video_url)
     llm_response = analyse_audio("data/audio.mp3")
     summary_text = llm_response["summary"]
+    transcript = llm_response["results"]
 
     label_relevance = "\n".join(
         [
@@ -23,9 +24,10 @@ if st.button(label="Summarise", use_container_width=True):
     )
 
     st.subheader(video_title)
-    tab1, tab2 = st.tabs(["Summary", "Topics"])
+    tab1, tab2, tab3 = st.tabs(["Summary", "Topics", "Transcript"])
     with tab1:
         st.markdown(summary_text)
+        text_to_speech(summary_text)
     with tab2:
         for label, relevance in llm_response["label_relevance"].items():
             col1, col2, col3 = st.columns(3)
@@ -35,4 +37,12 @@ if st.button(label="Summarise", use_container_width=True):
                 st.progress(relevance)
             with col3:
                 st.write(f"{round(relevance * 100, 2)}%")
-    text_to_speech(summary_text)
+    with tab3:
+        for item in transcript:
+            st.markdown(
+                f"""
+                Timestamp: {item.timestamp.start} - {item.timestamp.end}
+                
+                {item.text}                     
+                """
+            )

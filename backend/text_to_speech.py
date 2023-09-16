@@ -3,8 +3,11 @@ from playsound import playsound
 import os
 import logging
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+
+import streamlit as st
 
 
 def text_to_speech(input_text):
@@ -17,6 +20,7 @@ def text_to_speech(input_text):
 
     # Create the "data" folder if it doesn't exist
     if not os.path.exists(data_folder):
+        logger.info("Data folder missing. Creating data folder")
         os.makedirs(data_folder)
 
     # Save the TTS as an MP3 file in the "data" folder
@@ -26,7 +30,8 @@ def text_to_speech(input_text):
 
     # Play the MP3 file
     absolute_mp3_path = os.path.abspath(mp3_file_path)
-    playsound(absolute_mp3_path)
+    # playsound(absolute_mp3_path)
+    st.audio(absolute_mp3_path)
 
 
 if __name__ == "__main__":
