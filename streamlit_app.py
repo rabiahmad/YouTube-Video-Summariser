@@ -6,7 +6,9 @@ from backend.text_to_speech import text_to_speech
 
 st.title("YouTube Video Summariser")
 
-video_url = st.text_input(label="Enter video link")
+video_url = st.text_input(
+    label="Enter video link", placeholder="https://www.youtube.com/watch?v=5O46Rqh5zHE"
+)
 
 if st.button(label="Summarise", use_container_width=True):
     video_title = download_video(video_url)
