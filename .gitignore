@@ -163,4 +163,4 @@ cython_debug/
 data/*
 
 # Ignore secrets
-.steamlit/secrets.toml
+.streamlit/secrets.toml
