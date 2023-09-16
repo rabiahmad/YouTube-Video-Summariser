@@ -1,4 +1,5 @@
 streamlit
 pytube
 assemblyai
-pyttsx3
+gtts
+playsound
