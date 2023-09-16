@@ -3,7 +3,7 @@ from playsound import playsound
 import os
 import logging
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
@@ -20,6 +20,7 @@ def text_to_speech(input_text):
 
     # Create the "data" folder if it doesn't exist
     if not os.path.exists(data_folder):
+        logger.info("Data folder missing. Creating data folder")
         os.makedirs(data_folder)
 
     # Save the TTS as an MP3 file in the "data" folder

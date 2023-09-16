@@ -43,6 +43,6 @@ if st.button(label="Summarise", use_container_width=True):
                 f"""
                 Timestamp: {item.timestamp.start} - {item.timestamp.end}
                 
-                Text: {item.text}                     
+                {item.text}                     
                 """
             )
