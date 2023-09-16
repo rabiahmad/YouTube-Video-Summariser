@@ -1,11 +1,16 @@
 import assemblyai as aai
+import toml
+
+
+def get_apikey(connector, item):
+    secrets = toml.load(".streamlit/secrets.toml")
+    result = secrets[connector][item]
+    return result
 
 
 def analyse_audio(FILE_URL):
     # replace with your API token
-    aai.settings.api_key = (
-        f"deacc26566c14ea1b48e51f4c99afbb6"  # TODO put this into secrets
-    )
+    aai.settings.api_key = get_apikey("ai-assembly", "api_key")
 
     # URL of the file to transcribe
     config = aai.TranscriptionConfig(
