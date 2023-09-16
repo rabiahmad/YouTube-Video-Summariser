@@ -7,6 +7,9 @@ logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 
+import streamlit as st
+
+
 def text_to_speech(input_text):
     logger = logging.getLogger(f"{__name__}.text_to_speech")
     logger.info("Running text to speech function")
@@ -26,7 +29,8 @@ def text_to_speech(input_text):
 
     # Play the MP3 file
     absolute_mp3_path = os.path.abspath(mp3_file_path)
-    playsound(absolute_mp3_path)
+    # playsound(absolute_mp3_path)
+    st.audio(absolute_mp3_path)
 
 
 if __name__ == "__main__":
